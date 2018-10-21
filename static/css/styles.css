@@ -1,0 +1,77 @@
+body{
+    font-family: Comic Sans MS;
+}
+.red {
+    background-color: red;
+}
+.navbar-custom {
+    background-color: rgba(89, 182, 39, 0.59);
+    /* height:4.5em; */
+    border-bottom: 1px solid grey;
+}
+.brand-custom {
+    font-size: 2em;
+}
+.img-user{
+    max-width: 4em;
+    max-height: 5em;
+    border:1px solid black;
+    border-radius: 25%;
+}
+
+.nav-custom-item{
+    display: flex;
+}
+.form-custom{
+    margin-top:  auto;
+    margin-bottom: auto;
+}
+.members-list li{
+    list-style-type: none;
+}
+.avatar{
+    max-width: 5em;
+    max-height: 6em;
+    margin-bottom:10px;
+    margin-top: 10px;
+    /* margin-left:auto;
+    margin-right:auto; */
+}
+.question-container{
+    margin-top:1em;
+}
+
+.pagination > li >a{
+    color:red;
+}
+.question-container-border{
+    border:2px solid #B812A4;
+    border-radius: 10%;
+}
+
+.likes{
+    margin-bottom: 1em;
+}
+.input-question{
+    margin:1em 1em 1em 2em;
+}
+.upload-img{
+    max-width: 9em;
+    max-height: 10em;
+}
+
+/* .input-row{
+    display:flex;
+} */
+/* .right-container{
+    margin-left:1em;
+    border-left: 1px solid grey;
+    padding-left:11px;
+} */
+/* .custom-container{
+    height: 100%;
+} */
+
+/* .custom-search{
+
+} */

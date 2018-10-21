@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <h2>Registration</h2>
+    </div>
+    <form action="#" class='input-question' method="POST" enctype="multipart/form-data">
+        <div class="form-group row" style="display:none;">
+            <div class="col-2"></div>
+            <div class="col-5 justify-content-center">
+                <div class="invalid-feedback d-block" >Sorry, this email address is already registred!</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Login" class="col-2 col-form-label">Login</label>
+            <div class="col-5">
+                <input type="text" id='Login' class="form-control" maxlength="50" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Email" class="col-2 col-form-label">Email</label>
+            <div class="col-5">
+                <input type="email" id='Email' class="form-control" maxlength="50" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="NickNmae" class="col-2 col-form-label">NickName</label>
+            <div class="col-5">
+                <input type="text" id='NickName' class="form-control" maxlength="50" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Password" class="col-2 col-form-label">Password</label>
+            <div class="col-5">
+                <input type="password" id='Password' class="form-control" maxlength="20" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="RepeatPassword" class="col-2 col-form-label">Repeat Password</label>
+            <div class="col-5">
+                <input type="password" id='RepeatPassword' class="form-control" maxlength="20" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="UploadAvatar" class="col-2 col-form-label">Upload avatar</label>
+            <div class="col-5">
+                <input type="file" id='UploadAvatar' class="form-control-file" maxlength="20" >
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2"></div>
+            <div class="col-5"><button type="submit" class="btn btn-success">Register!</button></div>
+        </div>
+
+    </form>
+{% endblock %}
