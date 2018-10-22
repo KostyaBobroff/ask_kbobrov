@@ -11,18 +11,6 @@
                 <a href={% url "hot" %} >Hot Questions</a>
             </div>
         {% endblock %}
-{#        {% if page_name == 'index' %}#}
-{#        <div class="col-4">#}
-{#            <h2>New Questions</h2>#}
-{#        </div>#}
-{#        <div class="col-8">#}
-{#            <a href={% url "hot" %} >Hot Questions</a>#}
-{#        </div>#}
-{#        {% elif  page_name == 'hot'%}#}
-{#            <h2>Hot Questions</h2>#}
-{#        {% else %}#}
-{#            <h2>Tag: {{ tag }}</h2>#}
-{#        {% endif %}#}
     </div>
     {% for question in questions %}
        {% include "questions/question.html" %}
