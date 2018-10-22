@@ -62,3 +62,7 @@ def paginate(objects_list, request):
     paginator = {'current_page':request.GET.get('page'),
                  'paginator': pag}
     return page, paginator
+
+
+def settings(request):
+    return render(request, "questions/settings.html")
