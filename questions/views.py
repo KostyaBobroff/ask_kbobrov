@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -10,14 +10,13 @@ questions = [{"title": "title{}".format(i),
               "number_of_answers": i,
               "tags": ['tag1', 'tag{}'.format(i),],
               "number":i
-              } for i in range(10)]
+              } for i in range(15)]
 
 def index(request):
-
     page_name = 'index'
-    page, paginator = paginate(questions, request)
+    page = paginate(questions, request)
 
-    return render(request, "questions/index.html", context={"questions": page, "page_name":page_name, 'paginator': paginator})
+    return render(request, "questions/index.html", context={"questions": page, "page_name":page_name})
 
 
 def get_best_questions(request):
@@ -56,12 +55,16 @@ def add_question(request):
 
 def paginate(objects_list, request):
     pag = Paginator(objects_list, 3)
-
-    page = pag.get_page(request.GET.get('page'))
-    page.number
-    paginator = {'current_page':request.GET.get('page'),
-                 'paginator': pag}
-    return page, paginator
+    try:
+        page = pag.get_page(request.GET.get('page'))
+    except PageNotAnInteger:
+        page = pag.get_page(1)
+    except EmptyPage:
+        page = pag.get_page(pag.num_pages)
+    # paginator = {'current_page':request.GET.get('page'),
+    #              'paginator': pag}
+    # return page, paginator
+    return page
 
 
 def settings(request):
