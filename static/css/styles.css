@@ -1,5 +1,5 @@
 body{
-    font-family: Comic Sans MS;
+    font-family: Roboto Sans MS;
 }
 .red {
     background-color: red;
@@ -52,6 +52,11 @@ body{
 .likes{
     margin-bottom: 1em;
 }
+.askme-sticky {
+    position: sticky;
+    top: 1rem;
+}
+
 .input-question{
     margin:1em 1em 1em 2em;
 }

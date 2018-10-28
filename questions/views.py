@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from questions.models import *
 # Create your views here.
 # class AboutView(TemplateView):
 #     template_name = "about.html"
@@ -16,7 +17,7 @@ def index(request):
     page_name = 'index'
     page = paginate(questions, request)
 
-    return render(request, "questions/index.html", context={"questions": page, "page_name":page_name})
+    return render(request, "questions/index.html", context={"questions": questions, "page_name":page_name})
 
 
 def get_best_questions(request):
@@ -69,3 +70,4 @@ def paginate(objects_list, request):
 
 def settings(request):
     return render(request, "questions/settings.html")
+

@@ -1,15 +1,15 @@
-
+{% load pagination_tags %}
 <div class="row justify-content-center question-container">
-     <nav aria-label="Page navigation example" class='pagination'>
-        <ul class="pagination">
-            {% if questions.has_previous %}
-                 <li class="page-item "><a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a></li>
-            {% endif %}
-            <li class="page-item .active"><a class="page-link" href="?page={{ questions.number }}">{{ questions.number }}</a></li>
-            {% if questions.has_next %}
-                 <li class="page-item .active"><a class="page-link" href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-
+{#     <nav aria-label="Page navigation example" class='pagination'>#}
+{#        <ul class="pagination">#}
+{#            {% if questions.has_previous %}#}
+{#                 <li class="page-item "><a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a></li>#}
+{#            {% endif %}#}
+{#            <li class="page-item .active"><a class="page-link" href="?page={{ questions.number }}">{{ questions.number }}</a></li>#}
+{#            {% if questions.has_next %}#}
+{#                 <li class="page-item .active"><a class="page-link" href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a></li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </nav>#}
+    {% autopaginate questions 3 %}
 </div>

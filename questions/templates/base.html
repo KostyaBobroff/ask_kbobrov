@@ -28,7 +28,7 @@
                 </form>
                 <div class="navbar-nav ">
                     <div class="navbar-item ">
-                        <div class='col-md-6'>
+                        <div class='col-6'>
                             <img class="img-user" alt='изображение' src={% static "img/img.jpg" %}>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     {% endblock %}
                 </div>
                 <div class="col-3">
-                    <div class="container-fluid">
+                    <div class="container-fluid askme-sticky">
                         <div class="row">
                             <div class=" container-fluid tags">
                                 <div class="row">
@@ -70,12 +70,14 @@
                             </div>
                         </div>
                         <div class="row question-container">
-                            <h3>Best Members</h3>
+                            <div class="col-3">
+                           <h3>Best Members</h3>
                             <ul class='members-list'>
                                 {% for user in best_users %}
                                 <li><a href="#">{{ user }}</a></li>
                                {% endfor %}
                             </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
