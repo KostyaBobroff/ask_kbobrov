@@ -1,45 +1,47 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
 from questions.models import *
-# Create your views here.
-# class AboutView(TemplateView):
-#     template_name = "about.html"
-questions = [{"title": "title{}".format(i),
-              "text": "Something like text + {}".format(i),
-              "number_of_answers": i,
-              "tags": ['tag1', 'tag{}'.format(i),],
-              "number":i
-              } for i in range(15)]
+
+
+# questions = [{"title": "title{}".format(i),
+#               "text": "Something like text + {}".format(i),
+#               "number_of_answers": i,
+#               "tags": ['tag1', 'tag{}'.format(i),],
+#               "number":i
+#               } for i in range(15)]
 
 def index(request):
-    page_name = 'index'
-    page = paginate(questions, request)
+    questions_paginate = paginate(Question.objects.all().prefetch_related(), request)
 
-    return render(request, "questions/index.html", context={"questions": questions, "page_name":page_name})
+    return render(request, "questions/index.html", context={"questions": questions_paginate})
 
 
 def get_best_questions(request):
-    page_name = 'hot'
-    return render(request, "questions/hot.html", context={"questions": questions, "page_name": page_name})
+    questions_paginate = paginate(Question.objects.get_hot(), request)
+    return render(request, "questions/hot.html", context={"questions": questions_paginate, })
 
 
 def get_tag_page(request, tag_name):
-    questions_by_tags = []
-    for question in questions:
-        if tag_name in question['tags']:
-            questions_by_tags.append(question)
-    page_name = 'tags'
-    return render(request, "questions/tagpage.html", context={"questions": questions_by_tags, "page_name": page_name, 'tag':tag_name})
+    # questions_by_tags = []
+    # for question in questions:
+    #     if tag_name in question['tags']:
+    #         questions_by_tags.append(question)
+    # page_name = 'tags'
+    questions_paginate = paginate(Question.objects.get_by_tag(tag_name), request)
+    # questions_paginate = paginate(questions_by_tags, request)
+    return render(request, "questions/tagpage.html", context={"questions": questions_paginate,  'tag':tag_name})
 
 def get_question_by_number(request, number):
-    question = questions[number]
-    answers =  [{
-              "text": "Something like text + {}".format(i),
-              } for i in range(10)]
+    try:
+        question = Question.objects.get(pk=number)
+    except Question.DoesNotExist:
+        question = None
+    # question = questions[number]
+    # answers =  [{
+    #           "text": "Something like text + {}".format(i),
+    #           } for i in range(10)]
     return render(request, "questions/answers.html",
-                  context={"question": question, 'answers': answers})
+                  context={"question": question})
 
 
 def login(request):

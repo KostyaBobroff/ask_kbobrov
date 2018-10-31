@@ -3,7 +3,7 @@
 {% block content %}
 {% include "questions/question_for_answer_page.html" %}
     <hr>
-    {% for answer in answers %}
+    {% for answer in question.comment_set.all %}
         {% include "questions/answer.html" %}
     {% endfor %}
     <hr>

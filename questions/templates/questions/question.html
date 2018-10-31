@@ -14,19 +14,20 @@
     </div>
     <div class="col-9">
         <div class="row">
-            <h3><a href={% url "question" question.number %}>{{ question.title }}</a></h3>
+            <h3><a href={% url "question" question.pk %}>{{ question.title }}</a></h3>
         </div>
         <div class="row">
             <p>{{ question.text }}</p>
+            <p>{{ question.rating }}</p>
         </div>
         <div class="row mb-0">
             <div class="col-4">
-                <a href={% url "question" question.number %}>answer({{ question.number_of_answers }})</a>
+                <a href={% url "question" question.pk %}>answer({{ question.comments_count}})</a>
             </div>
             <div class="col-8">
                 Tags:
-                {% for tag in question.tags %}
-                    <a href={% url "tag" tag %}>{{ tag }}</a>
+                {% for tag in question.tags.all %}
+                    <a href={% url "tag" tag.title %}>{{ tag.title }}</a>
                 {% endfor %}
             </div>
         </div>
