@@ -4,12 +4,16 @@
         <div class="row justify-content-center">
             <img class="avatar" src={% static "img/img.jpg" %}  >
         </div>
-
+        <div class="row justify-content-center">
+                {{ answer.likes_and_dislikes_count }}
+        </div>
          <div class="row justify-content-center">
 
-             <div class="btn btn-link btn-lg btn-like">
-                <i onclick="likeToggle(this)" class="fa fa-thumbs-up"></i>
-             </div>
+             <div class="row  justify-content-center ">
+                 <div class="btn btn-link btn-lg btn-like">
+                    <i onclick="likeToggle(this)" class="fa fa-thumbs-up"></i>
+                 </div>
+              </div>
         </div>
 
     </div>

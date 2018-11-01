@@ -17,10 +17,10 @@
         <link rel="stylesheet" href={% static "css/styles.css" %}>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom ">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light text-light" style="background-color: #59b627;">
+            <div class="container">
                 <div class="navbar-brand brand-custom">
-                    <a href="{% url "index" %}">AskQuestion</a>
+                    <a href="{% url "index" %}" style="color: #FFFFFF;">AskBobroff</a>
                 </div>
                 <form class="form-inline form-custom">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,40 +50,32 @@
         </nav>
         <div class="container" >
             <div class="row question-container">
-                <div class="col-9">
+                <div class="col-md-9">
 
                     {% block content %}
                     {% endblock %}
+                    {% block pagination %}
+                    {% endblock %}
                 </div>
-                <div class="col-3">
-                    <div class="container-fluid askme-sticky">
-                        <div class="row">
-                            <div class=" container-fluid tags">
-                                <div class="row">
-                                    <h3>Popular Tags</h3>
-                                </div>
-                                <div class="row">
-                                    {% for tag in best_tags %}
-                                    <a href="#" style="margin-right:1em;">{{ tag }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                <div class="col-md-3">
+                    <div class="askme-sticky">
+                        <div class="tags">
+                            <h3>Popular Tags</h3>
+                            {% for tag in best_tags %}
+                            <a href="#" style="margin-right:1em;">{{ tag }}</a>
+                            {% endfor %}
                         </div>
-                        <div class="row question-container">
-                            <div class="col-3">
-                           <h3>Best Members</h3>
+                        <div class="members">
+                            <h3>Best Members</h3>
                             <ul class='members-list'>
                                 {% for user in best_users %}
                                 <li><a href="#">{{ user }}</a></li>
                                {% endfor %}
                             </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {% block pagination %}
-            {% endblock %}
         </div>
     </body>
     <script>

@@ -1,9 +1,12 @@
 {% load static %}
-<div class="row question-container question-container-border">
-    <div class="col-3">
+<div class="border my-3 rounded shadow-sm row">
+    <div class="col-md-3">
         <div class="row justify-content-center">
-            <img class="avatar" src={% static "img/img.jpg" %}  >
+            <img class="avatar rounded" src={% static "img/img.jpg" %}  >
         </div>
+        <div class="row justify-content-center">
+          {{ question.likes_and_dislikes_count }}
+       </div>
         <div class="row justify-content-center">
              <div class="row justify-content-center">
                  <div class="btn btn-link btn-lg btn-like ">
@@ -11,8 +14,9 @@
                  </div>
             </div>
         </div>
+
     </div>
-    <div class="col-9">
+    <div class="col-md-9">
         <div class="row">
             <h3><a href={% url "question" question.pk %}>{{ question.title }}</a></h3>
         </div>

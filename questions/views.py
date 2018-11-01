@@ -1,17 +1,11 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from questions.models import *
 
 
-# questions = [{"title": "title{}".format(i),
-#               "text": "Something like text + {}".format(i),
-#               "number_of_answers": i,
-#               "tags": ['tag1', 'tag{}'.format(i),],
-#               "number":i
-#               } for i in range(15)]
 
 def index(request):
-    questions_paginate = paginate(Question.objects.all().prefetch_related(), request)
+    questions_paginate = paginate(Question.objects.get_new(), request)
 
     return render(request, "questions/index.html", context={"questions": questions_paginate})
 
@@ -22,26 +16,12 @@ def get_best_questions(request):
 
 
 def get_tag_page(request, tag_name):
-    # questions_by_tags = []
-    # for question in questions:
-    #     if tag_name in question['tags']:
-    #         questions_by_tags.append(question)
-    # page_name = 'tags'
     questions_paginate = paginate(Question.objects.get_by_tag(tag_name), request)
-    # questions_paginate = paginate(questions_by_tags, request)
     return render(request, "questions/tagpage.html", context={"questions": questions_paginate,  'tag':tag_name})
 
 def get_question_by_number(request, number):
-    try:
-        question = Question.objects.get(pk=number)
-    except Question.DoesNotExist:
-        question = None
-    # question = questions[number]
-    # answers =  [{
-    #           "text": "Something like text + {}".format(i),
-    #           } for i in range(10)]
     return render(request, "questions/answers.html",
-                  context={"question": question})
+                  context={"question": get_object_or_404(Question,pk=number) })
 
 
 def login(request):
@@ -64,9 +44,6 @@ def paginate(objects_list, request):
         page = pag.get_page(1)
     except EmptyPage:
         page = pag.get_page(pag.num_pages)
-    # paginator = {'current_page':request.GET.get('page'),
-    #              'paginator': pag}
-    # return page, paginator
     return page
 
 
