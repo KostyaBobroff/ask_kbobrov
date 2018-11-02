@@ -80,11 +80,11 @@ class Command(BaseCommand):
             for _ in range(random.randint(3,6)):
                 is_like = random.choice([True, False])
                 user = random.choice(users)
-                question.set_like( is_like=is_like, user=user)
+                question.set_like(is_like=is_like, user=user)
 
         for comment in comments:
             for _ in range(random.randint(3,6)):
                 is_like = random.choice([True, False])
                 user = random.choice(users)
-                comment.set_like( is_like=is_like, user=user)
+                comment.set_like(is_like=is_like, user=user)
 

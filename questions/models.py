@@ -20,15 +20,16 @@ class Question(models.Model):
     create_date = models.DateTimeField(default=datetime.now, verbose_name=u"Время создания вопроса")
     is_active = models.BooleanField(default=True, verbose_name=u"Доступность вопроса")
     tags = models.ManyToManyField(Tag, blank=True, related_name="questions")
+    rating = models.IntegerField(default=0)
     objects = QuestionManager()
 
     def comments_count(self):
        return self.comment_set.count()
 
-    def likes_and_dislikes_count(self):
-        dislike_count = self.questionvote_set.filter(is_like = False).count()
-        like_count = self.questionvote_set.filter(is_like=True).count()
-        return like_count - dislike_count
+    # def likes_and_dislikes_count(self):
+    #     dislike_count = self.questionvote_set.filter(is_like = False).count()
+    #     like_count = self.questionvote_set.filter(is_like=True).count()
+    #     return like_count - dislike_count
 
     def set_like(self,  user, is_like):
         try:
@@ -37,7 +38,9 @@ class Question(models.Model):
                 vote.is_like = is_like
         except QuestionVote.DoesNotExist:
             vote = QuestionVote.objects.create(author=user, is_like=is_like, question=self)
+        self.rating += 1 if vote.is_like else -1
         vote.save()
+        self.save()
 
     def __str__(self):
         return self.title
@@ -53,11 +56,12 @@ class Comment(models.Model):
     create_data = models.DateTimeField(default=datetime.now, verbose_name=u"Время создания комментария")
     correct = models.BooleanField(default=False)
     text = models.TextField(blank=True ,verbose_name=u"Комментарий")
+    rating = models.IntegerField(default=0)
 
-    def likes_and_dislikes_count(self):
-        dislike_count = self.commentvote_set.filter(is_like=False).count()
-        like_count = self.commentvote_set.filter(is_like=True).count()
-        return like_count - dislike_count
+    # def likes_and_dislikes_count(self):
+    #     dislike_count = self.commentvote_set.filter(is_like=False).count()
+    #     like_count = self.commentvote_set.filter(is_like=True).count()
+    #     return like_count - dislike_count
 
     def set_like(self,  user, is_like):
         try:
@@ -66,7 +70,9 @@ class Comment(models.Model):
                 vote.is_like = is_like
         except CommentVote.DoesNotExist:
             vote = CommentVote.objects.create(author=user, is_like=is_like, comment=self)
+        self.rating += 1 if vote.is_like else -1
         vote.save()
+        self.save()
 
     def __str__(self):
         return "{questions} {user}".format(questions=self.question, user=self.author)

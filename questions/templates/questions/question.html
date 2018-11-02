@@ -5,7 +5,7 @@
             <img class="avatar rounded" src={% static "img/img.jpg" %}  >
         </div>
         <div class="row justify-content-center">
-          {{ question.likes_and_dislikes_count }}
+          {{ question.rating }}
        </div>
         <div class="row justify-content-center">
              <div class="row justify-content-center">
@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <p>{{ question.text }}</p>
-            <p>{{ question.rating }}</p>
+{#            <p>{{ question.rating }}</p>#}
         </div>
         <div class="row mb-0">
             <div class="col-4">
