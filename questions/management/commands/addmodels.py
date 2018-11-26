@@ -3,11 +3,11 @@ from faker import Faker
 import random
 from questions.models import *
 
-COUNT_USERS = 10
-COUNT_TAGS = 30
-COUNT_QUESTIONS = 100
-COUNT_COMMENTS = 300
-
+COUNT_USERS = 10001
+COUNT_TAGS = 10001
+COUNT_QUESTIONS = 100001
+COUNT_COMMENTS = 1000001
+COUNT_LIKES = 2000001
 
 
 class Command(BaseCommand):
@@ -24,7 +24,7 @@ class Command(BaseCommand):
         users_list = []
         faker = Faker()
         for i in range(COUNT_USERS):
-            user = User.objects.create_user(username="User{}".format(i), password='askme{}'.format(i))
+            user = User.objects.create_user(username="User_{}".format(i), password='askme{}'.format(i))
             user.first_name = faker.first_name()
             user.last_name = faker.last_name()
             user.email = faker.email()
@@ -76,15 +76,27 @@ class Command(BaseCommand):
 
 
     def add_votes_for_questions_and_comments(self, questions, comments, users):
-        for question in questions:
-            for _ in range(random.randint(3,6)):
-                is_like = random.choice([True, False])
-                user = random.choice(users)
-                question.set_like(is_like=is_like, user=user)
+        for _ in range(int(COUNT_LIKES/2)):
+            is_like = random.choice([True, False])
+            user = random.choice(users)
+            question = random.choice(questions)
+            question.set_like(is_like=is_like, user=user)
 
-        for comment in comments:
-            for _ in range(random.randint(3,6)):
-                is_like = random.choice([True, False])
-                user = random.choice(users)
-                comment.set_like(is_like=is_like, user=user)
+        for _ in range(int(COUNT_LIKES/2)):
+            is_like = random.choice([True, False])
+            user = random.choice(users)
+            comment = random.choice(comments)
+            comment.set_like(is_like=is_like, user=user)
 
+        # for question in questions:
+        #     for _ in range(random.randint(3,6)):
+        #         is_like = random.choice([True, False])
+        #         user = random.choice(users)
+        #         question.set_like(is_like=is_like, user=user)
+        #
+        # for comment in comments:
+        #     for _ in range(random.randint(3,6)):
+        #         is_like = random.choice([True, False])
+        #         user = random.choice(users)
+        #         comment.set_like(is_like=is_like, user=user)
+        #

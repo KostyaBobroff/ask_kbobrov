@@ -23,8 +23,8 @@ urlpatterns = [
     path('hot/',views.get_best_questions, name="hot"),
     path("tag/<str:tag_name>/", views.get_tag_page, name="tag"),
     path("question/<int:number>/", views.get_question_by_number, name="question"),
-    path("login/", views.login, name="login" ),
-    path("signup/", views.signup, name="signup"),
-    path("ask/", views.add_question, name="add_question"),
-    path("settings/", views.settings, name="settings")
+    path("login/", views.LoginView.as_view(), name="login"),
+    path("signup/", views.SignUp.as_view(), name="signup"),
+    path("settings/", views.SettingsView.as_view(), name="settings"),
+    path('logout/', views.sign_out, name='logout')
 ]

@@ -4,6 +4,7 @@ from datetime import datetime
 from questions.managers import QuestionManager
 
 class User(AbstractUser):
+    nickname = models.CharField(max_length=30)
     upload = models.ImageField(blank=True,upload_to='uploads/%Y/%m/%d')
 
 class Tag(models.Model):

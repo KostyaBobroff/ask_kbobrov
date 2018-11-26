@@ -3,47 +3,76 @@
     <div class="row">
         <h2>Registration</h2>
     </div>
-    <form action="#" class='input-question' method="POST" enctype="multipart/form-data">
-        <div class="form-group row" style="display:none;">
-            <div class="col-2"></div>
+    {{ form.non_field_errors }}
+    <form action={% url "signup" %} class='input-question' method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+{#        <div class="form-group row" >#}
+{#            <div class="col-2"></div>#}
+{#            <div class="col-5 justify-content-center">#}
+{#                {% for field in form.fields %}#}
+{#                {% if field.errors %}#}
+{#                    <div class="invalid-feedback d-block">{{ field.errors }}</div>#}
+{#                    {% for error in field.errors %}#}
+{#                        <div class="invalid-feedback d-block">{{ error }}</div>#}
+{#                    {% endfor %}#}
+{#                {% endif %}#}
+{#                {% endfor %}#}
+{##}
+{#            </div>#}
+{#        </div>#}
+        <div class="form-group row" >
+                <div class="col-2"></div>
+{#            <div class="col-5 justify-content-center">#}
+{#                <div class="invalid-feedback d-block row">{{ form.non_field_errors }}</div>#}
+{#            </div>#}
             <div class="col-5 justify-content-center">
-                <div class="invalid-feedback d-block" >Sorry, this email address is already registred!</div>
+                <div class="invalid-feedback d-block row">{% for error in form.errors.values %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
             </div>
         </div>
+{#        {{ form }}#}
         <div class="form-group row">
             <label for="Login" class="col-2 col-form-label">Login</label>
             <div class="col-5">
-                <input type="text" id='Login' class="form-control" maxlength="50" >
+                {{ form.username }}
+{#                <input type="text" id='Login' class="form-control" maxlength="50" >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="Email" class="col-2 col-form-label">Email</label>
             <div class="col-5">
-                <input type="email" id='Email' class="form-control" maxlength="50" >
+                {{ form.email }}
+{#                <input type="email" id='Email' class="form-control" maxlength="50" >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="NickNmae" class="col-2 col-form-label">NickName</label>
             <div class="col-5">
-                <input type="text" id='NickName' class="form-control" maxlength="50" >
+                {{ form.nickname }}
+{#                <input type="text" id='NickName' class="form-control" maxlength="50" >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="Password" class="col-2 col-form-label">Password</label>
             <div class="col-5">
-                <input type="password" id='Password' class="form-control" maxlength="20" >
+                {{ form.password1 }}
+{#                <input type="password" id='Password' class="form-control" maxlength="20" >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="RepeatPassword" class="col-2 col-form-label">Repeat Password</label>
             <div class="col-5">
-                <input type="password" id='RepeatPassword' class="form-control" maxlength="20" >
+                {{ form.password2 }}
+{#                <input type="password" id='RepeatPassword' class="form-control" maxlength="20" >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="UploadAvatar" class="col-2 col-form-label">Upload avatar</label>
             <div class="col-5">
-                <input type="file" id='UploadAvatar' class="form-control-file" maxlength="20" >
+                {{ form.upload }}
+{#                <input type="file" id='UploadAvatar' class="form-control-file" maxlength="20" >#}
             </div>
         </div>
 

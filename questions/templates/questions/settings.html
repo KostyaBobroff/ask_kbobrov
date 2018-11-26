@@ -4,36 +4,42 @@
     <div class="row">
        <h2>Settings: Kostya Bobroff</h2>
     </div>
-    <form action="#" class='input-question' enctype="multipart/form-data" method="post">
-        <div class="form-group row" style="display:none;">
+    <form action={% url 'settings' %} class='input-question' enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+        <div class="form-group row">
             <div class="col-2"></div>
             <div class="col-6 justify-content-center">
-                <div class="invalid-feedback d-block" >Sorry, this email address allready registered! </div>
+{#                <div class="invalid-feedback d-block" >Sorry, this email address allready registered!</div>#}
+                <div class="invalid-feedback d-block" >{{ form.non_field_errors }}</div>
             </div>
         </div>
         <div class="form-group row">
             <label for="Login" class="col-2 col-form-label is-invalid">Login</label>
             <div class="col-6">
-                <input type="text" id='Login' class="form-control" maxlength="100"  >
+                {{ form.username }}
+{#                <input type="text" id='Login' class="form-control" maxlength="100"  >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="Email" class="col-2 col-form-label">Email</label>
             <div class="col-6">
-                <input type="email" id='Email' class="form-control" maxlength="100"  >
+                {{ form.email }}
+{#                <input type="email" id='Email' class="form-control" maxlength="100"  >#}
             </div>
         </div>
         <div class="form-group row">
             <label for="Nick" class="col-2 col-form-label">NickName</label>
             <div class="col-6">
-                <input type="text" id='Nick' class="form-control " maxlength="100" >
+                {{ form.nickname }}
+{#                <input type="text" id='Nick' class="form-control " maxlength="100" >#}
             </div>
         </div>
         <div class="form-group row" >
             <label for="Image" class="col-2 col-form-label">Upload avatar</label>
             <div class="col-6" id="Image">
                 <div class="row justify-content-center"><img class="avatar upload-img" src={% static 'img/img.jpg' %}></div>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                {{ form.upload }}
+{#                <input type="file" class="form-control-file" id="exampleFormControlFile1">#}
             </div>
         </div>
         <div class="form-group row">
