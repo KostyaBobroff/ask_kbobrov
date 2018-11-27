@@ -22,9 +22,10 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('hot/',views.get_best_questions, name="hot"),
     path("tag/<str:tag_name>/", views.get_tag_page, name="tag"),
-    path("question/<int:number>/", views.get_question_by_number, name="question"),
+    path("question/<int:number>/", views.QuestionByNumber.as_view(), name="question"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("signup/", views.SignUp.as_view(), name="signup"),
     path("settings/", views.SettingsView.as_view(), name="settings"),
-    path('logout/', views.sign_out, name='logout')
+    path('logout/', views.sign_out, name='logout'),
+    path('ask/', views.AskView.as_view(), name='ask')
 ]

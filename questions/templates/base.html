@@ -37,12 +37,16 @@
                             <div class="container-fluid">
                                 <a src="#">{{ user.nickname }}</a>
                                 <div class="row mt-4">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <a href={% url 'settings' %}>settings</a>
                                     </div>
-                                    <div class="col-6">
-                                        <a href={% url 'logout' %}>log out</a>
+                                    <div class="col-4">
+                                        <a href={% url 'ask' %}>ask!</a>
                                     </div>
+                                    <div class="col-4">
+                                        <a href={% url 'logout' %}>logout</a>
+                                    </div>
+
                                 </div>
                             </div>
                          </div>

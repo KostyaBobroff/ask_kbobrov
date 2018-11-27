@@ -7,9 +7,11 @@
         {% include "questions/answer.html" %}
     {% endfor %}
     <hr>
-    <form action="#" class='input-question'>
+    <form action={% url 'question' question.id %} class='input-question' method="post">
+    {% csrf_token %}
         <div class="form-group row">
-            <textarea  id='Text' class='form-control' cols="5" rows="5" placeholder="Enter your answer here.."></textarea>
+            {{ form.text }}
+{#            <textarea  id='Text' class='form-control' cols="5" rows="5" placeholder="Enter your answer here.."></textarea>#}
         </div>
         <div class="form-group row">
             <button type="submit" class="btn btn-primary">Ask!</button>
