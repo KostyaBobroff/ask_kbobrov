@@ -118,8 +118,8 @@ class AskView(LoginRequiredMixin, View):
     def post(self, request):
         form = AskForm(request.user.pk, request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('index')
+            question = form.save()
+            return redirect('question', number=question.pk)
         return render(request, 'questions/ask.html', context={'form':form})
 
 #
