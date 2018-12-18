@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+    {% csrf_token %}
     <div class="row">
         {% block header %}
            <div class="col-4">
@@ -12,6 +13,7 @@
             </div>
         {% endblock %}
     </div>
+
     {% for question in questions %}
        {% include "questions/question.html" %}
     {% endfor %}

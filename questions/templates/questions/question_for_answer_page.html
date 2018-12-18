@@ -2,17 +2,25 @@
 <div class="row question-container">
     <div class="col-3">
         <div class="row justify-content-center">
-            <img class="avatar" src={% static "img/img.jpg" %}  >
+            <img class="avatar" src="{{ question.author.upload.url }}"  >
         </div>
         <div class="row justify-content-center">
           {{ question.rating }}
        </div>
+
         <div class="row justify-content-center">
              <div class="row justify-content-center">
                   <div class="row justify-content-center">
-                     <div class="btn btn-link btn-lg btn-like">
-                        <i onclick="likeToggle(this)" class="fa fa-thumbs-up"></i>
-                     </div>
+                     <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like " id="like">
+                         <i class="fa fa-thumbs-up"></i>
+                    </div>
+                 </div>
+                 <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like " id="dislike">
+                         <i  class="fa fa-thumbs-down"></i>
+                    </div>
+                 </div>
                   </div>
             </div>
         </div>
@@ -33,4 +41,5 @@
             </div>
         </div>
     </div>
+{#    <input type="hidden" id="">#}
 </div>

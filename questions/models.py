@@ -5,7 +5,7 @@ from questions.managers import QuestionManager
 
 class User(AbstractUser):
     nickname = models.CharField(max_length=30)
-    upload = models.ImageField(blank=True,upload_to='uploads/%Y/%m/%d')
+    upload = models.ImageField(blank=True, upload_to='%Y/%m/%d')
 
 class Tag(models.Model):
     title = models.CharField(max_length=120, verbose_name=u"Заголовок ярлыка")
@@ -37,11 +37,14 @@ class Question(models.Model):
             vote = self.questionvote_set.get(author=user)
             if vote.is_like is not is_like:
                 vote.is_like = is_like
+            else:
+                return None
         except QuestionVote.DoesNotExist:
             vote = QuestionVote.objects.create(author=user, is_like=is_like, question=self)
         self.rating += 1 if vote.is_like else -1
         vote.save()
         self.save()
+        return self.rating
 
     def __str__(self):
         return self.title
@@ -69,11 +72,14 @@ class Comment(models.Model):
             vote = self.commentvote_set.get(author=user)
             if vote.is_like is not is_like:
                 vote.is_like = is_like
+            else:
+                return None
         except CommentVote.DoesNotExist:
             vote = CommentVote.objects.create(author=user, is_like=is_like, comment=self)
         self.rating += 1 if vote.is_like else -1
         vote.save()
         self.save()
+        return self.rating
 
     def __str__(self):
         return "{questions} {user}".format(questions=self.question, user=self.author)

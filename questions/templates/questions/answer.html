@@ -1,16 +1,26 @@
 {% load static %}
-<div class="row question-container question-container-border">
+<div class="row question-container question-container-border answer">
+{#    <input type="hidden"  name="comment" value="{{ answer.id }}"/>#}
     <div class="col-md-3">
         <div class="row justify-content-center">
-            <img class="avatar" src={% static "img/img.jpg" %}  >
+            <img class="avatar" src="{{ answer.author.upload.url }}"  >
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="comment_{{ answer.id }}">
           {{ answer.rating }}
        </div>
          <div class="row justify-content-center">
              <div class="row  justify-content-center ">
-                 <div class="btn btn-link btn-lg btn-like">
-                    <i onclick="likeToggle(this)" class="fa fa-thumbs-up"></i>
+                 <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like like" >
+                         <input type="hidden"  name="comment" value="{{ answer.id }}"/>
+                         <i class="fa fa-thumbs-up"></i>
+                    </div>
+                 </div>
+                 <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like dislike" >
+                         <input type="hidden"  name="comment" value="{{answer.id }}"/>
+                         <i  class="fa fa-thumbs-down"></i>
+                    </div>
                  </div>
               </div>
         </div>
@@ -22,9 +32,8 @@
         <div class="form-group row mb-0">
                 <label for="correct" >Correct!</label>
             <div class="col-md-5">
-                <input type="checkbox" id="correct">
+                <input type="checkbox" id="{{ answer.id }}" {% if answer.correct %}checked{% endif %} {% if question.author != user %}disabled{% endif %}>
             </div>
         </div>
     </div>
 </div>
-

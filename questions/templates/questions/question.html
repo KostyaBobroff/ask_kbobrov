@@ -2,16 +2,26 @@
 <div class="border my-3 rounded shadow-sm row">
     <div class="col-md-3">
         <div class="row justify-content-center">
-            <img class="avatar rounded" src={% static "img/img.jpg" %}  >
+            <img class="avatar rounded" src="{{ question.author.upload.url }}"  >
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="question_{{ question.id }}">
           {{ question.rating }}
        </div>
         <div class="row justify-content-center">
              <div class="row justify-content-center">
-                 <div class="btn btn-link btn-lg btn-like ">
-                    <i onclick="likeToggle(this)" class="fa fa-thumbs-up"></i>
+                 <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like like" >
+                         <input type="hidden"  name="question" value="{{ question.id }}"/>
+                         <i class="fa fa-thumbs-up"></i>
+                    </div>
                  </div>
+                 <div class="col-md-6">
+                     <div class="btn btn-link btn-lg btn-like dislike" >
+                         <input type="hidden"  name="question" value="{{ question.id }}"/>
+                         <i  class="fa fa-thumbs-down"></i>
+                    </div>
+                 </div>
+
             </div>
         </div>
 
@@ -31,7 +41,7 @@
             <div class="col-8">
                 Tags:
                 {% for tag in question.tags.all %}
-                    <a href={% url "tag" tag.title %}>{{ tag.title }}</a>
+                    <a class="badge badge-success" href={% url "tag" tag.title %}>{{ tag.title }}</a>
                 {% endfor %}
             </div>
         </div>

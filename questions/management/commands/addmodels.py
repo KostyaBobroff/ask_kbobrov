@@ -3,7 +3,7 @@ from faker import Faker
 import random
 from questions.models import *
 
-COUNT_USERS = 10001
+COUNT_USERS = 10000
 COUNT_TAGS = 10001
 COUNT_QUESTIONS = 100001
 COUNT_COMMENTS = 1000001
@@ -28,19 +28,19 @@ class Command(BaseCommand):
             user.first_name = faker.first_name()
             user.last_name = faker.last_name()
             user.email = faker.email()
-            user.save()
-            users_list.append(user)
 
+            users_list.append(user)
+        User.objects.bulk_create(users_list, batch_size=120)
         return users_list
 
     def add_tags(self):
         tags_list = []
         faker = Faker()
         for _ in range(COUNT_TAGS):
-            tag = Tag.objects.create(title=faker.word())
-            tag.save()
-            tags_list.append(tag)
+            tag = Tag.objects.create(title=faker.word()+str(_))
 
+            tags_list.append(tag)
+        Tag.objects.bulk_create(tags_list, batch_size=120)
         return tags_list
 
     def add_questions(self, users, tags):
@@ -58,9 +58,9 @@ class Command(BaseCommand):
                                                text=faker.text(), author=user)
 
             question.tags.add(*tags_for_questions)
-            question.save()
-            questions_list.append(question)
 
+            questions_list.append(question)
+        Question.objects.bulk_create(questions_list, batch_size=120)
         return questions_list
 
     def add_comments(self, users, questions):
