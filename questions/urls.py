@@ -29,5 +29,7 @@ urlpatterns = [
     path('logout/', views.sign_out, name='logout'),
     path('ask/', views.AskView.as_view(), name='ask'),
     path('set_like/', views.set_like, name='set_like'),
-    path('set_correct/', views.set_correct, name='set_correct')
+    path('set_correct/', views.set_correct, name='set_correct'),
+    path('hello_world/', views.hello_world, name='hello'),
+    path('parametrs/', views.parametrs)
 ]

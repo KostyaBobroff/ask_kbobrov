@@ -3,8 +3,9 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from questions.models import *
@@ -87,6 +88,7 @@ class SettingsView(LoginRequiredMixin, View):
         print(form.errors)
         return render(request, template_name="questions/settings.html", context={'form': form})
 
+
 class LoginView(View):
     def get(self, request):
         form = SignInForm()
@@ -152,3 +154,17 @@ def set_correct(request):
         com.save()
         return JsonResponse({'correct': True})
     raise Http404('this url only for ajax')
+
+
+def hello_world(request):
+    return HttpResponse("Hello World!", content_type='text/plain')
+
+@csrf_exempt
+def parametrs(request):
+    body = None
+    if request.method == 'GET':
+        body =str(request.GET)
+    elif request.method == 'POST':
+        body = str(request.body)
+
+    return HttpResponse(body, content_type='text/plain')
