@@ -1,0 +1,31 @@
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        gunicorn/19.9.0
+Server Hostname:        localhost
+Server Port:            8000
+
+Document Path:          /static/css/styles.css
+Document Length:        1195 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      1416 bytes
+HTML transferred:       1195 bytes
+Requests per second:    172.32 [#/sec] (mean)
+Time per request:       5.803 [ms] (mean)
+Time per request:       5.803 [ms] (mean, across all concurrent requests)
+Transfer rate:          238.29 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        3    3   0.0      3       3
+Total:          6    6   0.0      6       6

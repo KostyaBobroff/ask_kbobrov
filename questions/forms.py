@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from questions.models import User, Question, Tag, Comment
 from django.contrib.auth import authenticate
@@ -130,7 +132,18 @@ class AskForm(forms.ModelForm):
 
 
 
+class AjaxForm(forms.Form):
 
+    jsonfield = forms.CharField(max_length=1024)
+
+    def clean_jsonfield(self):
+        jdata = self.cleaned_data['jsonfield']
+        try:
+            json_data = json.loads(jdata)
+        except:
+            raise forms.ValidationError("Invalid data in jsonfield" )
+
+        return jdata
 
 
 # class QuestionForm(forms.ModelForm):

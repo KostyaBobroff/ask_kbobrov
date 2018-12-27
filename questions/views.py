@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 
 from questions.models import *
 from django.views import View
-from questions.forms import SignUpForm, SignInForm, UserSettingsForm, CommentForm, AskForm
+from questions.forms import SignUpForm, SignInForm, UserSettingsForm, CommentForm, AskForm, AjaxForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import resolve
 
@@ -148,11 +148,12 @@ def set_like(request):
 @login_required
 def set_correct(request):
     if request.is_ajax():
-        data = json.loads(request.body)
-        com = Comment.objects.get(pk=data['comment_id'])
-        com.correct = data['correct']
-        com.save()
-        return JsonResponse({'correct': True})
+        if (AjaxForm(request.body).is_valid()):
+            data = json.loads(request.body)
+            com = Comment.objects.get(pk=data['comment_id'])
+            com.correct = data['correct']
+            com.save()
+            return JsonResponse({'correct': True})
     raise Http404('this url only for ajax')
 
 
